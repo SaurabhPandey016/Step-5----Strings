@@ -1,0 +1,31 @@
+class Solution {
+public:
+
+    int beauty(int * freq)
+    {
+        int mostFreq = 0, leastFreq = INT_MAX;
+        for( auto i= 0; i<26; i++)
+        {
+            mostFreq = max(mostFreq, freq[i]);
+            if(freq[i] >= 1) leastFreq = min(leastFreq, freq[i]);
+        }
+
+        return mostFreq - leastFreq;
+    }
+
+    int beautySum(string s) {
+        
+        int ans = 0;
+        for(auto i = 0; i<s.length(); i++)
+        {
+            int freq[26] = {0};
+            for(auto j = i; j<s.length(); j++)
+            {
+                freq[s[j] - 'a']++;
+                ans = ans + beauty(freq);
+            }
+        }
+
+        return ans;
+    }
+};
